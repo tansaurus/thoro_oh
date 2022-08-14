@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <iostream>
+
+using namespace std;
+
+int minN(int a, int b)
+{
+    return a < b ? a : b;
+    //삼항연산자 
+    //? 앞의 조건식에 따라 a, b가 선택됨
+    //조건식이 참이면 a
+    //조건식이 거짓이면 b
+
+}
+
+
+
+int main(void)
+{
+    int a = 0; //범위의 첫숫자
+    int b = 0; //범위의 마지막숫자
+    int sum = 0; //합계
+    int min = 10000;
+    cin >> a >> b; //입력 받기
+
+
+    //b까지의 제곱수니까 i * i < = b
+    for (int i = 1; i * i <= b; i++) 
+    {
+        if (i * i >= a) //a보다 i * i가 크면 (범위 안에 들어오면)
+        {
+            min = minN(min, i * i); //sum에 더하기
+            sum += i * i;
+        }
+    }
+
+    if (sum) {
+        cout << sum<< endl; //출력
+        cout << min<< endl; //출력
+    }
+       
+    else {
+         cout << -1 << endl; //아니면 -1 출력
+    }
+       
+
+
+    return 0;
+}
