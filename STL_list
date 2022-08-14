@@ -1,0 +1,185 @@
+//header
+#include<stdio.h>
+#define MAXNODE 100
+
+
+class logic {
+private:
+	//초기화
+	struct Node {
+		int data;
+		Node* prev;
+		Node* next;
+		Node* loc;
+	} node[MAXNODE];
+
+	int arr_idx;
+	Node* head, * tail;
+	Node* getNode() {
+		return &node[arr_idx++];//?
+	}
+
+public:
+	void init();
+	void pushFront(int data);
+	void pushBack(int data);
+	void search(int data);
+	void popFront(int data);
+	void popBack(int data);
+	void print_all();
+	void erase(int data);
+	void insert(int data);
+	void clear();
+	int size_t(Node* node, int data);
+	bool empty();
+
+};
+
+//Source.cpp
+#include "logic.h"
+#include <iostream>
+
+using namespace std;
+
+void logic::init() {
+	arr_idx = 0;
+	head = getNode();
+	tail = getNode();
+	head->next = tail; //head의 next가 tail을 향하고
+	tail->prev = head; //tail의 prev가 head를 향함
+};
+
+void logic::pushFront(int data) { //Head 쪽으로 삽입
+	Node* pp = getNode(); //Node* pp 생성
+	pp->data = data; //pp는 data로 연결
+	pp->next = head->next; //pp의 next는 head의 next로 변경
+	head->next = pp; //head의 next를 pp로 변경
+	pp->prev = pp->next->prev; //pp->prev를 pp->next(원래 head->next)->prev로 변경
+	pp->next->prev = pp; //pp->next->prev를 pp로 지정
+};
+
+void logic::pushBack(int data) { //tail 쪽으로 삽입
+	Node* pp = getNode();//Node* pp 생성
+	pp->data = data; //pp를 data로 연결
+	pp->prev = tail->prev; //pp->prev를 tail->prev로 변경
+	tail->prev = pp; //tail->는 pp로 변경
+	pp->next = pp->prev->next; //pp->next는 pp->prev(원래 tail->prev였던 것)->next로 변경
+	pp->prev->next = pp; //pp->prev->next를 pp로 지정
+};
+
+void logic::popFront(int data) { //data를 지워보자
+	for (Node* pp = head->next; pp != tail; pp = pp->next) {
+		//head->next인 Node* pp가 tail이 아닐때(list가 끝나기 전까지) 계속  pp->next를 구한다
+		if (pp->data == data) { //지울 data랑 data가 같아질때
+			pp->next->prev = pp->prev; //이제 tail이 head를 가리킴
+			pp->prev->next = pp->next; //이제 haed가 tail를 가리킴
+			break;
+		}
+	}
+};
+
+void logic::popBack(int data) { //data를 지워보자
+	for (Node* pp = tail->prev; pp != head; pp = pp->prev) {
+		
+		if (pp->data == data) { //지울 data랑 data가 같아질때
+			pp->next->prev = pp->prev; //이제 tail이 head를 가리킴
+			pp->prev->next = pp->next; //이제 haed가 tail를 가리킴
+			break;
+		}
+	}
+};
+
+void logic::erase(int data) {
+	for (Node* pp = head->next; pp != tail; pp = pp->next) {
+		//head->next인 Node* pp가 tail이 아닐때(list가 끝나기 전까지) 계속  pp->next를 구한다
+		if (pp->data == data) { //지울 data랑 data가 같아질때
+			pp->next->prev = pp->prev; //이제 tail이 head를 가리킴
+			pp->prev->next = pp->next; //이제 haed가 tail를 가리킴
+			break;
+		}
+	}
+};
+void logic::insert(int data) {
+	Node* pp = getNode(); //Node* pp 생성
+	pp->data = data; //pp는 data로 연결
+	pp->next = head->next; //pp의 next는 head의 next로 변경
+	head->next = pp; //head의 next를 pp로 변경
+	pp->prev = pp->next->prev; //pp->prev를 pp->next(원래 head->next)->prev로 변경
+	pp->next->prev = pp; //pp->next->prev를 pp로 지정
+};
+void logic::clear() {
+	for (Node* pp = head->next; pp != tail;) {
+		pp = NULL;
+		head->data = NULL;
+		tail->data = NULL;
+	}
+};
+int logic::size_t(Node * node, int data) {
+	int countPp = 0;
+	for (Node* pp = head->next; pp = tail; pp = pp->next) {
+		if (pp->data == data) {
+			countPp++;
+		}
+	}
+	cout << countPp << endl;
+	
+};
+bool logic::empty() {
+	cout << true << endl;
+};
+
+void logic::print_all() { //입력받은 data 다 출력
+	for (Node* pp = head->next; pp != tail; pp = pp->next) {
+		//head->next인 Node* pp가 tail이 아닐때(list가 끝나기 전까지) 계속  pp->next를 구한다
+		cout << pp->data << " "; //data 출력
+	}
+	cout << endl;
+}
+
+//main.cpp
+#include <iostream>
+#include <string>
+#include "logic.h"
+
+using namespace std;
+
+
+int main(void) {
+
+	logic sth;
+
+
+	sth.init();
+
+	sth.pushFront(10);
+	sth.pushFront(20);
+	sth.pushFront(30);
+	sth.print_all();
+
+	sth.pushBack(60);
+	sth.pushBack(50);
+	sth.pushBack(40);
+	sth.print_all();
+
+	sth.popFront(10);
+	sth.print_all();
+
+	sth.popBack(60);
+	sth.print_all();
+
+	sth.erase(40);
+	sth.print_all();
+
+	sth.insert(100);
+	sth.print_all();
+
+	sth.size_t();
+
+	bool empty();
+
+	sth.clear();
+	sth.print_all();
+		
+
+	return 0;
+}
