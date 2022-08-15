@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+	int N = 0;
+	cin >> N;
+
+	string star = "*";
+	string blank = " ";
+	for (int i = 1; i <= N; i++) {
+
+		for (int k = (N - i); k >= 1; k--) {
+			cout << blank;
+		}
+
+		for (int j = 0; j < (2 * i - 1); j++) {
+			cout << star;
+
+		}
+		
+		cout << endl;
+	}
+	return 0;
+}
