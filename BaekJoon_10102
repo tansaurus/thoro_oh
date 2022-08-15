@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+	int V = 0;
+
+	cin >> V;
+
+	char num[100];
+
+	cin >> num;
+
+	int A = 0;
+	int B = 0;
+	string result = "";
+
+	for (int i = 0; i < V; i++) {
+		
+		if (num[i] == 'A') {
+			A++;
+		}
+		else if (num[i] == 'B') {
+			B++;
+		}
+	}
+
+	if (A > B) {
+		result = "A";
+	}
+	else if (A < B) {
+		result = "B";
+	}
+	else if (A == B) {
+		result = "Tie";
+	}
+
+	cout << result << endl;
+
+	return 0;
+}
