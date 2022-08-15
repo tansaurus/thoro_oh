@@ -1,0 +1,27 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int testCaseA = 0;
+	int testCaseB = 0;
+	int sum = 0;
+
+	while (true) {
+		
+		cin >> testCaseA >> testCaseB;
+
+		sum = testCaseA + testCaseB;
+		
+		if (testCaseA == 0 && testCaseB == 0) {
+			break;
+		}
+		cout << sum << endl;
+	}
+		
+
+
+	
+
+	return 0;
+}
