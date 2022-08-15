@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+	int N = 0;
+	cin >> N;
+
+	string star = "*";
+	
+	for (int i = 1; i <= N; i++) {
+		
+			for (int k = 0; k < i; k++) {
+				cout << star;
+			}
+			
+			cout << endl;
+		
+	}
+	return 0;
+}
