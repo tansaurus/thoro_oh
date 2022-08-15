@@ -1,0 +1,24 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+	int T = 0;
+
+	cin >> T;
+
+	int testCaseA = 0;
+	int testCaseB = 0;
+	int sum = 0;
+
+	for (int i = 0; i < T; i++) {
+		cin >> testCaseA >> testCaseB;
+
+		sum = testCaseA + testCaseB;
+		cout << sum << endl;
+	}
+
+	
+
+	return 0;
+}
