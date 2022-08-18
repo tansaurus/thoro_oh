@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+#define MAX 100000000;
+
+long long dist[100001]; //도시별 도로의 길이
+long long price[100001]; // 도시별 주유 가격
+long long N = 0; // 도시의 개수
+long long sum = 0; // 총 가격
+long long greedy = MAX; // 제일 왼쪽 도시에서 제일 오른쪽 도시로 가는 최소 비용
+
+int main() {
+	cin >> N; //도시 수 받기
+
+	for (int i = 1; i <= N - 1; i++) { //거리는 도시수보다 하나 작고 첫 도시가 당연히 존재하기 때문에 1부터 셈
+		cin >> dist[i];
+	}
+	for (int i = 1; i <= N; i++) { //요금은 도시수만큼 있음
+		cin >> price[i];
+	}
+
+	for (int i = 1; i <= N - 1; i++) { //이동하는 횟수는 도시수 - 1임
+		if (price[i] <= greedy) { //최소금액보다 요금이 적거나 같으면
+			greedy = price[i]; //최소금액에 더 적은 금액을 집어넣고
+			sum += greedy * dist[i]; //거리만큼 곱해서 최종 금액 계산
+		}
+	}
+	cout << sum; // 최종 요금 출력
+
+	return 0;
+}
